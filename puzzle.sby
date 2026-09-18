@@ -1,15 +1,15 @@
 [options]
-mode bmc
-depth 125
+mode cover
+depth 150
 
 [engines]
-smtbmc bitwuzla
+smtbmc z3
 
 [script]
 read_liberty -ignore_miss_func /Users/annab/.ciel/ciel/sky130/versions/026824c7969ce6f4fc9678e6ca04b0a06a596c4b/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-read_verilog -sv puzzle_formal.sv
+read_verilog -sv puzzle_wrapper.sv
 read_verilog glf.v
-hierarchy -top puzzle_formal
+hierarchy -top puzzle_wrapper
 flatten
 proc; opt; memory; opt
 dfflegalize -cell $_DFF_P_ 1 -cell $_DFF_PP0_ 1
@@ -17,5 +17,5 @@ techmap; opt
 clean -purge
 
 [files]
-puzzle_formal.sv
+puzzle_wrapper.sv
 glf.v
