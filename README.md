@@ -9,7 +9,7 @@ Step 1:
 After opening the GDS file in Klayout, I poked around the design and was able to confirm it was unflattened and in sky130.
 
 Step 2:
-Next, I imported the sky130 LVS file to extract the target netlist. I went through the file by hand and commented out each line that either referenced a schematic or did a comparison. This only took around 10 minutes, and after running the script, I had a netlist.
+Next, I imported the sky130 LVS file to extract the target netlist. I went through the file by hand and commented out each line that either referenced a schematic or did a comparison. 
 
 Step 3:
 The netlist had both standard cell instantiations (X lines) and MOSFET gate definitions (M lines). In order to put it into Yosys, the M lines had to be removed through a process I learned was called black boxing.
@@ -27,7 +27,7 @@ Step 7:
 The blog explained that there was an output, an input, and a success pin, and I thought that the solution to the puzzle must be when success is high. So I researched how to find this out, and one of the ways to do so is using SymbiYosys with SMT solvers.
 
 Step 8:
-I ran a wrapper and a sby file against the verilog, and started with Bitwuzla with a depth of 128. Once I ran the file, I opened the trace in Surfer and discovered, to my utter amazement, that it had found an output where success was high, and that was was 28 (in hex) or "(" in ASCII.
+I ran a wrapper and a sby file against the verilog, and started with Bitwuzla with a depth of 128. Once I ran the file, I opened the trace in Surfer and discovered that it had found an output where success was high, and that was was 28 (in hex) or "(" in ASCII.
 
 Step 9:
 I re-ran the file, changing the mode from bmc to prove and increasing the depth to 150, however I was unable to find any other output values where success remained high. Under the original LinkedIn post, someone had mentioned using z3 instead of Bitwuzla. I thought it might be faster and decided to try it out. I made a new sby file, using z3 instead, with cover mode. I was surprised to find it was actually slower than Bitwzula, but when I opened the trace in Surfer I was stunned to see there were now two hex values in the output section while success was high for an additional clock cycle. These hex values were 28 and 2a.
