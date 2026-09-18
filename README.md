@@ -6,9 +6,11 @@ The simplest, most straight-forward solution to Jane Street's ASIC puzzle
 Tools: Klayout, Python, Verilog, Yosys, Sby, z3, Surfer 
 
 Step 1:
+
 After opening the GDS file in Klayout, I poked around the design and was able to confirm it was unflattened and in sky130.
 
 Step 2:
+
 Next, I imported the sky130 LVS file to extract the target netlist. I went through the file by hand and commented out each line that either referenced a schematic or did a comparison. 
 
 Step 3:
