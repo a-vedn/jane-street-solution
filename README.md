@@ -1,8 +1,6 @@
 # jane-street-solution
 Can you reverse engineer an ASIC?
 
-The simplest, most straight-forward solution to Jane Street's ASIC puzzle
-
 Tools: Klayout, Python, Verilog, Yosys, Sby, z3, Surfer 
 
 Step 1:
